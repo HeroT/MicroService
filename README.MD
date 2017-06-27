@@ -42,8 +42,9 @@ Micro Service(NBA DATABASE)
 ## 接口信息
 ### team-service
 下表为team-service中所有使用的api接口。
+
 Method  | Path  | Description   | Parameter    
-------------- | ------------------------- | ------------- |
+------------- | ------------------------- | ------------- | ------ | 
 GET | /teams  | 获得所有的队伍信息    | × 
 GET | /teams/name/{name} | 根据队伍名称获得队伍信息 | name 
 GET | /teams/id/{id}    | 根据队伍id获得队伍信息  | id
@@ -51,15 +52,17 @@ GET | /team | 根据队伍名称获得队伍id | name
 
 ### player-service
 下表为player-service里的所有使用的api接口。
+
 Method  | Path  | Description   | Parameter    
-------------- | ------------------------- | ------------- |
+------------- | ------------------------- | ------------- | -------- |
 GET | /players  | 根据传入参数筛选获得所有符合条件球员信息 | playerCondition 
 GET | /players/{id} | 根据球员id获得球员信息 | id
 
 ### match-service
 下表为match-service里的所有使用的api接口。
+
 Method  | Path  | Description   | Parameter    
-------------- | ------------------------- | ------------- |
+------------- | ------------------------- | ------------- | -------- |
 GET | /matches/{id} | 获得指定id的比赛信息 | 比赛id
 GET | /matches | 获得所有比赛信息 | x
 GET | /matches/team/{id} | 获得指定id的比赛信息| 队伍id
