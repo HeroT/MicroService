@@ -1,0 +1,49 @@
+version: '3'
+services:
+  eureka:
+    build: ./eureka
+    ports:
+      - 8761:8761
+    restart: always
+
+  zuul:
+    build: ./zuul
+    ports:
+      - 80:4000
+    restart: always
+
+  player-mysql:
+    build: ./player-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  player-service:
+    build: ./player-service
+    depends_on:
+      - player-mysql
+    ports:
+      - 8080:8080
+    restart: always
+
+  match-mysql:
+    build: ./match-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  match-service:
+    build: ./match-service
+    depends_on:
+      - match-mysql
+    ports:
+      - 8081:8080
+    restart: always
+
+  team-mysql:
+    build: ./team-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+  team-service:
+    build: ./team-service
+    depends_on:
+      - team-mysql
+    ports:
+      - 8082:8080
+    restart: always

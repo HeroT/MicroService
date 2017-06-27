@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peihao.nba.team.repository.TeamRepository">
+    <select id="findAll" resultType="Team">
+        SELECT *
+        FROM `team_profile`
+    </select>
+
+
+    <select id="findOneByName" resultType="Team">
+        SELECT *
+        FROM `team_profile`
+        WHERE `team_profile`.`eng_name` = #{name}
+    </select>
+
+    <select id="findOneById" resultType="Team">
+        SELECT *
+        FROM `team_profile`
+        WHERE `team_profile`.`id` = #{id}
+    </select>
+
+
+</mapper>

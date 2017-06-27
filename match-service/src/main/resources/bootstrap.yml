@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: match-service
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://match-mysql:3306/nba?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.peihao.nba.match.domain
+
+page:
+  number:
+    defaultValue: 1
+    queryString: page
+  size:
+    defaultValue: 10
+    maxValue: 30
+    queryString: pageSize
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/

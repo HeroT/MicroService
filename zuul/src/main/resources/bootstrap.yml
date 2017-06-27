@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: zuul
+
+server:
+  port: 4000
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:8761/eureka/
+
+zuul:
+  routes:
+    match-service:
+      path: /matches**/**
+      serviceId: match-service
+      stripPrefix: false
+    player-service:
+      path: /players**/**
+      serviceId: player-service
+      stripPrefix: false
+    team-service:
+      path: /teams**/**
+      serviceId: team-service
+      stripPrefix: false
+  prefix: /api

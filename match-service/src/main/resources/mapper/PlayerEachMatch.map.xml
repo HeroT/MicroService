@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.peihao.nba.match.repository.PlayerEachMatchRepository">
+
+
+    <select id="findAllMatchByName" resultType="PlayerEachMatch">
+        SELECT *
+        FROM `match_player`
+        WHERE `match_player`.`name` = #{name}
+    </select>
+
+    <select id="findAllMatchById" resultType="PlayerEachMatch">
+        SELECT *
+        FROM `match_player`
+        WHERE `match_player`.`player_id` = #{id}
+    </select>
+
+    <select id="findTopPlayers" resultType="PlayerAvgMatch">
+        SELECT `name`,`player_id`,format(avg(${type}),1) as #{type}
+        FROM `match_player`
+        Group by `match_player`.`name`,`match_player`.`player_id`
+        Order by avg(${type}) DESC
+        limit 9
+    </select>
+
+    <select id="findPlayerLeastMatchById" resultType="PlayerEachMatch">
+        SELECT `time`,`shoot_goal`,`shoot_num`,`three_goal`,`three_num`,`rebound`,`assist`,`fault`,`foul`,`block`,`score`,`value`,`team1_id`,`team2_id`,`date`,`score1`,`score2`
+        FROM `nba`.`match_player`,`nba`.`match`
+        where `player_id` =#{id} and `match_id`=`nba`.`match`.`id`
+        order by `nba`.`match`.`date` desc
+        limit 10
+    </select>
+
+
+
+</mapper>

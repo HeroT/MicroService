@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Player</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+  <style>
+
+	/* 定义辅助CSS来美化简历头部 */
+	body{
+	  font-family: 'microsoft yahei',Arial,sans-serif;
+	}
+
+	.cvheader{
+	  border-bottom: 1px solid #DFDFDF;
+	  padding-top:30px;
+	  padding-bottom:20px;
+	}
+
+	.cvheader h1{
+	  margin:0;
+	}
+
+	.address{
+	  background: #efb73e;
+	  color: #fff;
+	  padding: 10px 0;
+	}
+
+	/* 定义辅助CSS来美化简历主体 */
+
+	.cvbody{
+	  padding-top: 50px; 
+	}
+
+	.cbox{
+	  margin-bottom: 30px;
+	  color: #FFF;
+	  padding: 50px;
+	}
+
+	/* 定义cbox颜色 */
+	.green{
+	  background: #2ecc71;
+	}
+
+	.orange{
+	  background: orange;
+	}
+
+	.red{
+	  background: #dd4814;
+	}
+
+  .gray{
+    background: gray
+  }
+
+	.bbox{
+	  border: 1px solid #DFDFDF;
+	  border-radius: 5px;
+	  margin-bottom:30px;
+	  padding: 50px;
+	}
+
+	.footer{
+	  margin: 30px 0 30px;
+	  padding: 50px;
+	  background: #CCC;
+	  color: #FFF;
+	}
+</style>
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
+  <!--[if lt IE 9]>
+  <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
+  <![endif]-->
+  <script>
+      function getQueryString(name){
+          var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+          var r = window.location.search.substr(1).match(reg);
+          if(r!=null)return  unescape(r[2]); return null;
+      }
+  </script>
+
+</head>
+<body>
+  <!-- 定义简历的头部 //-->
+
+<div class="container" id="app_profile">
+  <div class="row cvheader">
+    <div class="col-lg-4 col-md-4 col-xs-12">
+      <!--  添加颜色//-->
+      <h1 class="text-primary">{{player.name}}</h1>
+      <!--  添加图标 //-->
+      <p><span class="glyphicon glyphicon-paperclip"></span> {{player.position}}</p>
+      <div class="col-lg-4 col-md-2 col-xs-12">
+      <p>
+        <!-- 这里定义图片为响应式，并且添加圆角效果，以便保证图片在不同设备上都可以完美显示 //-->
+        <img data-toggle="tooltip" data-placement="left" id="avatar" title="我是Terry" class="img-responsive img-rounded" v-bind:src="player.image" alt="">
+       </p>
+    </div>
+    </div>
+    
+    <div class="col-lg-8 col-md-3 col-xs-12">
+      <div class="row">
+        
+        
+        <div class="col-lg-8 col-md-8 col-xs-8">
+          <p><span class="glyphicon glyphicon-user">身高:</span> {{player.height}}</p>
+          <p><span class="glyphicon glyphicon-inbox">体重:</span> {{player.weight}}</p>
+          <p><span class="glyphicon glyphicon-home">大学:</span> {{player.university}}</p>
+          <p><span class="glyphicon glyphicon-road">年薪:</span> {{player.salary}}</p>
+          <p><span class="glyphicon glyphicon-signal">选秀:</span> {{player.turn}}</p>
+          <p><span class="glyphicon glyphicon-folder-open">合同:</span> {{player.contract}}</p>
+        </div>
+        
+      </div>
+    </div>
+    
+
+  </div>
+</div>
+
+<!-- 定义简历的主体部分 //-->
+
+<div class="container" id="app_data">
+  <div class="row cvbody">
+    
+    <!-- 这里定义两个区域，布局定义如下：//-->
+    
+    <div class="col-lg-10 col-md-6 col-xs-12">
+    
+      <div class="row">
+        <div class="cbox gray">
+          <h4>2016-2017赛季</h4>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <td>赛季</td>
+              <td>时间</td>
+              <td>投篮</td>
+              <td>三分</td>
+              <td>罚球</td>
+              <td>前场篮板</td>
+              <td>后场篮板</td>
+              <td>篮板</td>
+              <td>抢断</td>
+              <td>盖帽</td>
+              <td>失误</td>
+              <td>犯规</td>
+              <td>正负值</td>
+              <td>得分</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td>2016-2017</td>
+              <td>{{player.time}}</td>
+              <td>{{player.twoRate}}</td>
+              <td>{{player.threeRate}}</td>
+              <td>{{player.freeRate}}</td>
+              <td>{{player.fRebound}}</td>
+              <td>{{player.bRebound}}</td>
+              <td>{{player.rebound}}</td>
+              <td>{{player.steal}}</td>
+              <td>{{player.block}}</td>
+              <td>{{player.foul}}</td>
+              <td>{{player.fault}}</td>
+              <td>{{player.value}}</td>
+              <td>{{player.score}}</td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="cbox gray">
+          <h4>最近十场比赛</h4>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <td>赛季</td>
+              <td>客场</td>
+              <td>分数</td>
+              <td>主场</td>
+              <td>分数</td>
+              <td>时间</td>
+              <td>出手</td>
+              <td>命中</td>
+              <td>三分</td>
+              <td>命中</td>
+              <td>篮板</td>
+              <td>助攻</td>
+              <td>失误</td>
+              <td>犯规</td>
+              <td>正负值</td>
+              <td>得分</td>
+            </tr>
+            </thead>
+            <tbody>
+            <template v-for="value in matches">
+            <tr>
+              <td>2016-2017</td>
+              <td>{{value.team1Name}}</td>
+              <td>{{value.score1}}</td>
+              <td>{{value.team2Name}}</td>
+              <td>{{value.score2}}</td>
+              <td>{{value.time}}</td>
+              <td>{{value.shootNum}}</td>
+              <td>{{value.shootGoal}}</td>
+              <td>{{value.threeNum}}</td>
+              <td>{{value.threeGoal}}</td>
+              <td>{{value.rebound}}</td>
+              <td>{{value.assist}}</td>
+              <td>{{value.fault}}</td>
+              <td>{{value.foul}}</td>
+              <td>{{value.value}}</td>
+              <td>{{value.score}}</td>
+            </tr>
+            </template>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
+    </div>
+
+    <!-- 为了清楚的分割两个区域，这里我们添加了一个空白区域，或者也可以在CSS中定义Margin实现//-->
+    
+    
+  </div>
+</div>
+
+<!-- 引入jQuery类库和Bootstrap3的Javascript类库 //-->
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.11.1/jquery.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+
+  <script>
+      var app_profile = new Vue({
+          el: '#app_profile',
+          data: {
+              player:{},
+          },
+          created: function(){
+              this.getPlayer()
+          },
+          methods: {
+              getPlayer: function () {
+                  var id=getQueryString("id");
+                  this.$http.get('/api/players/'+id).then(response => {
+                      this.player = response.body.data;
+                  }, response => {
+                      console.log("API Error");window.location.reload();
+                  });
+
+              },
+
+          }
+      })
+  </script>
+
+
+
+  <script>
+      var app_data = new Vue({
+          el: '#app_data',
+          data: {
+              name:"player",
+              player:{},
+              matches:[]
+          },
+          created: function(){
+              this.getData()
+          },
+          methods: {
+              getData: function () {
+                  var id=getQueryString("id");
+                  console.log(id)
+                  this.$http.get('/api/matches/avg/id/'+id).then(response => {
+                      this.name = response.body.data.name;
+                  this.player=response.body.data;
+                  }, response => {
+                      console.log("API Error");window.location.reload();
+                  });
+
+
+                  this.$http.get('/api/matches/player/'+id).then(response => {
+                      this.matches = response.body.data;
+                  }, response => {
+                      console.log("API Error");window.location.reload();
+                  });
+
+              },
+
+          }
+      })
+  </script>
+
+</body>
+</html>

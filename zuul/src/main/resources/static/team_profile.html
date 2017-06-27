@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Team</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" rel="stylesheet">
+  <style>
+
+
+	body{
+	  font-family: 'microsoft yahei',Arial,sans-serif;
+	}
+
+	.cvheader{
+	  border-bottom: 1px solid #DFDFDF;
+	  padding-top:30px;
+	  padding-bottom:20px;
+	}
+
+	.cvheader h1{
+	  margin:0;
+	}
+
+	.address{
+	  background: #efb73e;
+	  color: #fff;
+	  padding: 10px 0;
+	}
+
+	/* 定义辅助CSS来美化简历主体 */
+
+	.cvbody{
+	  padding-top: 50px; 
+	}
+
+	.cbox{
+	  margin-bottom: 30px;
+	  color: #FFF;
+	  padding: 50px;
+	}
+
+	/* 定义cbox颜色 */
+	.green{
+	  background: #2ecc71;
+	}
+
+	.orange{
+	  background: orange;
+	}
+
+	.red{
+	  background: #dd4814;
+	}
+
+	.bbox{
+	  border: 1px solid #DFDFDF;
+	  border-radius: 5px;
+	  margin-bottom:30px;
+	  padding: 50px;
+	}
+
+	.footer{
+	  margin: 30px 0 30px;
+	  padding: 50px;
+	  background: #CCC;
+	  color: #FFF;
+	}
+
+    td {text-align:center}
+</style>
+
+
+
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
+
+  <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+
+  <![endif]-->
+  <script>
+      function getQueryString(name){
+          var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+          var r = window.location.search.substr(1).match(reg);
+          if(r!=null)return  unescape(r[2]); return null;
+      }
+  </script>
+</head>
+<body>
+
+
+<div class="container" id="app_team">
+  <div class="row cvheader">
+    <div class="col-lg-2 col-md-7 col-xs-12">
+
+      <h1 class="text-primary">{{team.name}}</h1>
+
+      <p><span class="glyphicon glyphicon-paperclip"></span> {{team.engName}}</p>
+    </div>
+    
+    <div class="col-lg-4 col-md-3 col-xs-12">
+      <div class="row">
+        
+        <div class="col-lg-4 col-md-4 col-xs-4">
+        </div>
+        
+        <div class="col-lg-8 col-md-8 col-xs-8">
+
+          <p><span class="glyphicon glyphicon-globe">城市:</span> {{team.city}}</p>
+          <p><span class="glyphicon glyphicon-home">主场:</span> {{team.home}}</p>
+          <p><span class="glyphicon glyphicon-adjust">分区:</span> {{team.conference}}</p>
+          <p><span class="glyphicon glyphicon-user">教练:</span> {{team.coach}}</p>
+          <p><span class="glyphicon glyphicon-th-list">简介:</span> {{team.intro}}</p>
+        </div>
+        
+      </div>
+    </div>
+    
+    <div class="col-lg-2 col-md-2 col-xs-12">
+      <p>
+
+        <img data-toggle="tooltip" data-placement="left" class="img-responsive img-rounded" v-bind:src="team.image" alt="">
+       </p>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container" id="app_player">
+  <div class="row cvbody">
+    
+
+    
+    <div class="col-lg-9 col-md-8 col-xs-12">
+    
+      <div class="row">
+              <h4>球员信息</h4>
+
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <td>姓名</td>
+                      <td>位置</td>
+                      <td>生日</td>
+                      <td>身高</td>
+                      <td>体重</td>
+                      <td>大学</td>
+                      <td>国籍</td>
+                      <td>选秀</td>
+                    </tr>
+                  </thead>
+                <tbody>
+                <template v-for="value in players">
+                    <tr>
+                        <td><a v-bind:href="getPlayerPage(value.id)">{{value.name}}</a></td>
+                        <td>{{value.position}}</td>
+                        <td>{{value.sbirthday}}</td>
+                        <td>{{value.height}}</td>
+                        <td>{{value.weight}}</td>
+                        <td>{{value.university}}</td>
+                        <td>{{value.nation}}</td>
+                        <td>{{value.turn}}</td>
+                    </tr>
+                </template>
+
+                </tbody>
+            </table>
+      </div>
+
+        <div class="row">
+          <h4>球队最近十场比赛</h4>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <td>赛季</td>
+              <td>队伍</td>
+              <td>比分</td>
+              <td>比分</td>
+              <td>队伍</td>
+              <td>时间</td>
+            </tr>
+            </thead>
+            <tbody>
+            <template v-for="value in matches">
+              <tr>
+                <td>2016-17</td>
+                <td>{{value.team1Name}}</td>
+                <td>{{value.score1}}</td>
+                <td>{{value.score2}}</td>
+                <td>{{value.team2Name}}</td>
+                <td>{{value.sDate}}</td>
+              </tr>
+            </template>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+
+    
+    </div>
+    
+
+    <div class="col-lg-1 col-md-1 col-xs-1"></div>
+
+    
+    
+  </div>
+</div>
+
+
+
+<script type='text/javascript' src="http://libs.baidu.com/jquery/1.11.1/jquery.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script>
+
+
+$(function(){
+  $('#contact').popover({placement:'bottom', container: 'body', html:true, content:'<p>QQ: 36181610</p><p>微博：weibo.com/gbtags</p><p>微信：gbtags</p>'});
+  $('#avatar').tooltip({'placement':'bottom'});
+
+	$.getScript('http://www.chartjs.org/assets/Chart.js',function(){
+
+	  var zhdata = [{
+			label: '中文水平',
+			value: 90,
+			highlight: "#FFC870",
+			color: "#F7464A"
+		}, {
+			value: 10,
+			color: "#EEEEEE"
+		}
+		]
+
+		var zhoptions = {
+			animation: true,
+			segmentShowStroke : false
+		};
+
+		var c = $('#zh');
+		var ct = c.get(0).getContext('2d');
+
+		var zhChart = new Chart(ct).Doughnut(zhdata, zhoptions);
+
+
+	  var endata = [{
+			label: '英文水平',
+			value: 80,
+			highlight: "#5AD3D1",
+			color: "#4D5360"
+		}, {
+        value: 20,
+        color: "#EEEEEE"
+		}
+		]
+
+		var enoptions = {
+			animation: true,
+			segmentShowStroke : false
+		};
+
+		var c = $('#en');
+		var ct = c.get(0).getContext('2d');
+
+		var enchart = new Chart(ct).Doughnut(endata, enoptions);
+	});
+
+});
+
+</script>
+
+  <script>
+      var app_team = new Vue({
+          el: '#app_team',
+          data: {
+              team:{},
+              name:"null",
+              imageUrl:"null"
+          },
+          created: function(){
+              this.getTeam()
+
+          },
+          methods: {
+
+              getTeam: function () {
+                  var id = getQueryString("id");
+                  this.$http.get('/api/teams/id/'+id).then(response => {
+                      this.team=response.body;
+                      this.imageUrl="./img/teams/"+this.team.engName+".png";
+                      console.log(this.team.id);
+                  }, response => {
+                      console.log("API Error");window.location.reload();
+                  })
+              }
+
+
+          }
+      })
+  </script>
+
+  <script>
+      var app_player = new Vue({
+          el: '#app_player',
+          data: {
+              players:[],
+              matches:[],
+          },
+          created: function(){
+              this.getPlayers()
+
+          },
+          methods: {
+
+              getPlayers: function () {
+                  var id = getQueryString("id");
+                  this.$http.get('/api/players?teamId='+id+"&pageSize=20").then(response => {
+                      this.players = response.body.data;
+              }, response => {
+                      console.log("API Error");window.location.reload();
+                  });
+
+                  this.$http.get('/api/matches/team/'+id).then(response => {
+                      this.matches = response.body.data;
+               }, response => {
+                      console.log("API Error");window.location.reload();
+                  });
+
+              },
+
+              getPlayerPage: function (id) {
+                  return "player.html?id="+id;
+              }
+
+          }
+      })
+  </script>
+
+</body>
+</html>
